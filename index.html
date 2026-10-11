@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   LittleSeed Plants &mdash; Temukan tanaman favoritmu
+  </title>
+  <style>
+:root {
+  --green:#176b38;
+  --green2:#2f854b;
+  --pale:#edf4e8;
+  --cream:#fbfaf6;
+  --ink:#24352a;
+  --muted:#748075;
+  --line:#e7ebe3;
+  --shadow:0 8px 28px rgba(32,63,39,.08)
+}
+
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:Inter,Arial,sans-serif;
+  font-size:14px
+}
+button,input,select {
+  font:inherit
+}
+button {
+  cursor:pointer
+}
+.wrap {
+  width:min(1440px,96%);
+  margin:auto
+}
+.topbar {
+  height:76px;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  border-bottom:1px solid var(--line);
+  padding:0 2px
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:175px;
+  color:var(--green);
+  text-decoration:none
+}
+.brand-mark {
+  font-size:31px;
+  line-height:1
+}
+.brand strong {
+  display:block;
+  font-family:Georgia,serif;
+  font-size:22px;
+  letter-spacing:-.8px
+}
+.brand small {
+  display:block;
+  text-align:center;
+  font-size:9px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-top:1px
+}
+.searchbox {
+  flex:1;
+  max-width:520px;
+  position:relative
+}
+.searchbox input {
+  width:100%;
+  border:1px solid #e2e6de;
+  border-radius:12px;
+  padding:12px 42px 12px 42px;
+  background:#fbfcfa;
+  outline:none
+}
+.searchbox input:focus {
+  border-color:#80ad88;
+  box-shadow:0 0 0 3px #eaf4e9
+}
+.searchbox span {
+  position:absolute;
+  left:15px;
+  top:10px;
+  font-size:18px;
+  color:#89968b
+}
+.actions {
+  margin-left:auto;
+  display:flex;
+  gap:22px
+}
+.action {
+  background:none;
+  border:0;
+  color:#4d5b50;
+  display:grid;
+  gap:3px;
+  justify-items:center;
+  font-size:11px;
+  position:relative
+}
+.action b {
+  font-size:19px;
+  font-weight:500
+}
+.count {
+  position:absolute;
+  top:-4px;
+  right:-7px;
+  background:#d94c5b;
+  color:white;
+  border-radius:20px;
+  font-size:9px;
+  padding:2px 5px
+}
+.nav {
+  display:flex;
+  gap:32px;
+  align-items:center;
+  height:48px;
+  border-bottom:1px solid var(--line);
+  padding:0 16px
+}
+.nav a {
+  color:#526054;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600
+}
+.nav a:hover,.nav a.active {
+  color:var(--green)
+}
+.nav a.active {
+  border-bottom:2px solid var(--green);
+  height:48px;
+  display:flex;
+  align-items:center
+}
+.hero {
+  margin-top:20px;
+  border-radius:16px;
+  overflow:hidden;
+  min-height:340px;
+  background:linear-gradient(90deg,#f1f6ed 0%,#f1f6ed 39%,rgba(241,246,237,.25) 67%),url('https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1500&q=85') center 48%/cover;
+  display:flex;
+  align-items:center;
+  padding:42px 5%
+}
+.hero-copy {
+  max-width:430px
+}
+.eyebrow {
+  color:var(--green);
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:1.8px
+}
+.hero h1 {
+  font-family:Georgia,serif;
+  font-size:clamp(32px,3.5vw,48px);
+  line-height:1.08;
+  margin:13px 0;
+  color:#183c27;
+  letter-spacing:-1px
+}
+.hero p {
+  font-size:14px;
+  line-height:1.7;
+  color:#56665a;
+  max-width:360px
+}
+.btn {
+  border:1px solid var(--green);
+  background:var(--green);
+  color:#fff;
+  border-radius:8px;
+  padding:11px 18px;
+  font-size:12px;
+  font-weight:700;
+  transition:.2s
+}
+.btn:hover {
+  background:#10552c;
+  transform:translateY(-1px)
+}
+.btn.outline {
+  background:transparent;
+  color:var(--green)
+}
+.btn.outline:hover {
+  background:#e8f2e8
+}
+.hero-buttons {
+  display:flex;
+  gap:12px;
+  margin-top:22px
+}
+.benefits {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:18px 0 34px
+}
+.benefit {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:15px 20px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#fff
+}
+.benefit .ico {
+  font-size:25px
+}
+.benefit strong {
+  display:block;
+  font-size:12px
+}
+.benefit small {
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px
+}
+.section-head {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin:32px 0 17px
+}
+.section-head h2 {
+  font-family:Georgia,serif;
+  font-size:27px;
+  margin:0;
+  color:#203b28
+}
+.section-head p {
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:12px
+}
+.text-link {
+  color:var(--green);
+  font-weight:700;
+  text-decoration:none;
+  font-size:12px
+}
+.categories {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px
+}
+.category {
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+  text-align:center;
+  padding:0 0 13px;
+  transition:.2s;
+  color:var(--ink)
+}
+.category:hover,.category.selected {
+  border-color:#70a67a;
+  box-shadow:var(--shadow);
+  transform:translateY(-2px)
+}
+.category img {
+  width:100%;
+  height:110px;
+  object-fit:cover;
+  background:#f1f4ed
+}
+.category span {
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin:12px 4px 0
+}
+.newsletter {
+  margin:38px 0;
+  background:#f0f5e9;
+  border-radius:14px;
+  padding:22px 28px;
+  display:flex;
+  align-items:center;
+  gap:18px
+}
+.newsletter .leaf {
+  font-size:34px
+}
+.newsletter-copy {
+  flex:1
+}
+.newsletter h3 {
+  margin:0 0 5px;
+  font-family:Georgia,serif;
+  font-size:20px
+}
+.newsletter p {
+  margin:0;
+  color:var(--muted);
+  font-size:12px
+}
+.newsletter form {
+  display:flex;
+  gap:8px;
+  width:min(420px,45%)
+}
+.newsletter input {
+  flex:1;
+  min-width:0;
+  border:1px solid #dce4d8;
+  border-radius:7px;
+  padding:11px 12px;
+  outline:none
+}
+.shop-layout {
+  display:grid;
+  grid-template-columns:225px 1fr;
+  gap:25px;
+  margin-top:28px
+}
+.filters {
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+  height:max-content;
+  position:sticky;
+  top:15px
+}
+.filter-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line)
+}
+.filter-head strong {
+  font-size:15px
+}
+.reset {
+  border:0;
+  background:none;
+  color:var(--green);
+  font-size:11px;
+  font-weight:700
+}
+.filter-group {
+  padding:17px 0 2px;
+  border-bottom:1px solid #f0f1ed
+}
+.filter-group:last-child {
+  border:0
+}
+.filter-group h4 {
+  margin:0 0 12px;
+  font-size:12px
+}
+.check {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+  font-size:12px;
+  color:#566258
+}
+.check input {
+  accent-color:var(--green);
+  width:14px;
+  height:14px
+}
+.range-row {
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:8px
+}
+.range {
+  width:100%;
+  accent-color:var(--green)
+}
+.products-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:2px 0 15px;
+  gap:12px
+}
+.results {
+  font-size:12px;
+  color:var(--muted)
+}
+.results strong {
+  color:var(--ink)
+}
+select {
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  padding:10px 12px;
+  font-size:12px;
+  color:#4d5b50;
+  outline:none
+}
+.product-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px
+}
+.product-card {
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+  transition:.22s;
+  min-width:0
+}
+.product-card:hover {
+  box-shadow:var(--shadow);
+  transform:translateY(-3px)
+}
+.product-image {
+  height:180px;
+  position:relative;
+  background:#f4f5ef;
+  overflow:hidden;
+  cursor:pointer
+}
+.product-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .35s
+}
+.product-card:hover .product-image img {
+  transform:scale(1.04)
+}
+.heart {
+  position:absolute;
+  top:10px;
+  right:10px;
+  border:0;
+  border-radius:50%;
+  width:31px;
+  height:31px;
+  background:#ffffffdc;
+  font-size:17px;
+  color:#7e8a7f
+}
+.heart.liked {
+  color:#d94c5b
+}
+.product-info {
+  padding:12px
+}
+.product-name {
+  border:0;
+  background:none;
+  padding:0;
+  text-align:left;
+  font-size:13px;
+  font-weight:750;
+  color:#293a2e;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  width:100%
+}
+.product-name:hover {
+  color:var(--green)
+}
+.product-price {
+  font-weight:800;
+  color:var(--green);
+  font-size:13px;
+  margin-top:8px
+}
+.rating {
+  font-size:11px;
+  color:#e59a25;
+  margin-top:6px
+}
+.rating span {
+  color:#7b857b;
+  margin-left:3px
+}
+.product-meta {
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  margin-top:9px
+}
+.tag {
+  font-size:10px;
+  padding:4px 7px;
+  background:#f0f5ed;
+  border-radius:5px;
+  color:#537258
+}
+.card-bottom {
+  display:flex;
+  gap:7px;
+  margin-top:12px
+}
+.card-bottom .btn {
+  padding:8px 10px;
+  flex:1;
+  font-size:11px
+}
+.card-bottom .outline {
+  padding:7px 9px
+}
+.pagination {
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  margin:27px 0 45px
+}
+.page {
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  background:white;
+  border-radius:8px;
+  color:#526054;
+  font-size:12px
+}
+.page.active,.page:hover {
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green)
+}
+.footer {
+  background:#f4f6f0;
+  padding:30px 0 20px;
+  margin-top:30px
+}
+.footer-grid {
+  display:grid;
+  grid-template-columns:1.5fr repeat(3,1fr);
+  gap:30px
+}
+.footer p,.footer a {
+  font-size:11px;
+  color:#68756a;
+  line-height:1.8
+}
+.footer h4 {
+  font-size:12px;
+  margin:0 0 12px
+}
+.footer a {
+  display:block;
+  text-decoration:none
+}
+.footer a:hover {
+  color:var(--green)
+}
+.copyright {
+  border-top:1px solid #e1e7dc;
+  margin-top:24px;
+  padding-top:15px;
+  color:#829083;
+  font-size:10px
+}
+.empty {
+  grid-column:1/-1;
+  text-align:center;
+  padding:50px 15px;
+  border:1px dashed #d5dfd2;
+  border-radius:12px;
+  color:var(--muted)
+}
+.empty strong {
+  display:block;
+  color:var(--ink);
+  font-size:17px;
+  margin-bottom:7px
+}
+.overlay {
+  position:fixed;
+  inset:0;
+  background:#12231875;
+  z-index:10;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+.overlay.show {
+  display:flex
+}
+.modal {
+  background:white;
+  border-radius:16px;
+  max-width:760px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  box-shadow:0 20px 70px #0002;
+  position:relative
+}
+.modal-close {
+  position:absolute;
+  right:14px;
+  top:12px;
+  border:0;
+  background:#f2f5ef;
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  font-size:20px;
+  z-index:2
+}
+.detail {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  padding:28px
+}
+.detail img {
+  width:100%;
+  height:360px;
+  object-fit:cover;
+  border-radius:12px;
+  background:#f2f4ee
+}
+.detail h2 {
+  font-family:Georgia,serif;
+  font-size:28px;
+  margin:12px 0
+}
+.detail .price {
+  font-size:22px;
+  color:var(--green);
+  font-weight:800;
+  margin:15px 0
+}
+.detail p {
+  color:#647165;
+  line-height:1.7;
+  font-size:13px
+}
+.detail ul {
+  padding-left:18px;
+  color:#59675b;
+  font-size:12px;
+  line-height:2
+}
+.cart-panel {
+  position:fixed;
+  right:0;
+  top:0;
+  height:100%;
+  width:min(410px,100%);
+  background:white;
+  z-index:20;
+  box-shadow:-10px 0 40px #0001;
+  transform:translateX(110%);
+  transition:transform .25s;
+  padding:24px;
+  display:flex;
+  flex-direction:column
+}
+.cart-panel.open {
+  transform:translateX(0)
+}
+.cart-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding-bottom:17px
+}
+.cart-head h2 {
+  font-family:Georgia,serif;
+  margin:0
+}
+.cart-head button {
+  border:0;
+  background:none;
+  font-size:25px
+}
+.cart-items {
+  overflow:auto;
+  flex:1
+}
+.cart-item {
+  display:grid;
+  grid-template-columns:68px 1fr auto;
+  gap:12px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  align-items:center
+}
+.cart-item img {
+  width:68px;
+  height:68px;
+  object-fit:cover;
+  border-radius:8px
+}
+.cart-item strong {
+  font-size:12px
+}
+.cart-item small {
+  display:block;
+  color:var(--green);
+  margin-top:6px
+}
+.qty {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:8px
+}
+.qty button {
+  width:23px;
+  height:23px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#fff
+}
+.remove {
+  border:0;
+  background:none;
+  color:#c45a5a
+}
+.cart-total {
+  padding-top:16px;
+  border-top:1px solid var(--line)
+}
+.cart-total div {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+  font-weight:800
+}
+.cart-total .btn {
+  width:100%
+}
+.toast {
+  position:fixed;
+  bottom:22px;
+  left:50%;
+  transform:translate(-50%,20px);
+  opacity:0;
+  background:#1e5d34;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:9px;
+  z-index:30;
+  box-shadow:var(--shadow);
+  transition:.25s;
+  font-size:12px;
+  pointer-events:none
+}
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+@media(max-width:1000px) {
+  .topbar {
+  gap:14px
+}
+.brand {
+  min-width:auto
+}
+.actions {
+  gap:12px
+}
+.categories {
+  grid-template-columns:repeat(3,1fr)
+}
+.product-grid {
+  grid-template-columns:repeat(3,minmax(0,1fr))
+}
+.product-image {
+  height:160px
+}
+.shop-layout {
+  grid-template-columns:190px 1fr;
+  gap:16px
+}
+.nav {
+  gap:20px
+}
+.hero {
+  min-height:300px
+}
+.footer-grid {
+  grid-template-columns:repeat(2,1fr)
+}
+
+}
+
+@media(max-width:700px) {
+  .wrap {
+  width:92%
+}
+.topbar {
+  height:auto;
+  min-height:70px;
+  flex-wrap:wrap;
+  padding:12px 0;
+  gap:12px
+}
+.brand strong {
+  font-size:19px
+}
+.searchbox {
+  order:3;
+  flex-basis:100%;
+  max-width:none
+}
+.actions {
+  gap:10px
+}
+.action {
+  font-size:9px
+}
+.nav {
+  overflow:auto;
+  white-space:nowrap;
+  padding:0 2px;
+  gap:23px
+}
+.hero {
+  min-height:340px;
+  padding:28px 22px;
+  background:linear-gradient(90deg,#f1f6ed 0%,rgba(241,246,237,.94) 52%,rgba(241,246,237,.3) 100%),url('https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1000&q=80') center/cover
+}
+.hero-copy {
+  max-width:310px
+}
+.hero h1 {
+  font-size:35px
+}
+.benefits {
+  grid-template-columns:1fr;
+  gap:8px;
+  margin-bottom:25px
+}
+.benefit {
+  padding:12px 15px
+}
+.categories {
+  grid-template-columns:repeat(2,1fr);
+  gap:10px
+}
+.category img {
+  height:115px
+}
+.newsletter {
+  align-items:flex-start;
+  flex-wrap:wrap;
+  padding:20px
+}
+.newsletter-copy {
+  min-width:70%
+}
+.newsletter form {
+  width:100%
+}
+.shop-layout {
+  display:block
+}
+.filters {
+  position:static;
+  margin-bottom:18px
+}
+.filter-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:0 18px
+}
+.filter-group {
+  padding:12px 0
+}
+.products-top {
+  align-items:flex-start;
+  flex-direction:column
+}
+.products-top select {
+  width:100%
+}
+.product-grid {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px
+}
+.product-image {
+  height:145px
+}
+.product-info {
+  padding:10px
+}
+.product-name {
+  font-size:12px
+}
+.product-price {
+  font-size:12px
+}
+.card-bottom {
+  flex-direction:column
+}
+.card-bottom .btn {
+  width:100%
+}
+.section-head h2 {
+  font-size:24px
+}
+.footer-grid {
+  gap:20px
+}
+.detail {
+  grid-template-columns:1fr;
+  padding:20px
+}
+.detail img {
+  height:260px
+}
+.detail h2 {
+  font-size:24px
+}
+
+}
+
+@media(max-width:390px) {
+  .product-grid {
+  grid-template-columns:1fr 1fr
+}
+.product-image {
+  height:125px
+}
+.hero h1 {
+  font-size:30px
+}
+.hero-buttons {
+  flex-wrap:wrap
+}
+.footer-grid {
+  grid-template-columns:1fr 1fr
+}
+
+}
+
+/* Halaman detail produk: tampil penuh, bukan modal mengambang */
+#detailOverlay.overlay {
+  position: fixed;
+  inset: 120px 0 0;
+  z-index: 9;
+  display: none;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  overflow-y: auto;
+  background: #fff;
+}
+#detailOverlay.overlay.show { display: block; }
+#detailOverlay .modal {
+  width: 100%;
+  max-width: none;
+  min-height: 100%;
+  max-height: none;
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+  padding: 0;
+}
+#detailOverlay .modal-close {
+  position: fixed;
+  top: 132px;
+  right: 22px;
+  background: #edf4e8;
+}
+#detailContent { display: block; max-width: 1240px; margin: 0 auto; padding: 24px 28px 40px; }
+.detail-crumb { color:#6d7b6d; font-size:12px; margin-bottom:18px; }
+.detail-layout { display:grid; grid-template-columns:minmax(0, 1.15fr) minmax(300px, .9fr); gap:34px; align-items:start; }
+.detail-gallery { display:grid; grid-template-columns:78px minmax(0,1fr); gap:12px; }
+.detail-thumbs { display:flex; flex-direction:column; gap:10px; }
+.detail-thumb { width:78px; height:78px; padding:3px; border:1px solid #dce5d9; border-radius:9px; background:#fff; overflow:hidden; }
+.detail-thumb.active { border:2px solid var(--green2); }
+.detail-thumb img { width:100%; height:100%; object-fit:cover; border-radius:5px; }
+.detail-main-image { width:100%; height: min(420px, 42vw); min-height:300px; object-fit:cover; border-radius:10px; background:#f2f4ee; }
+.detail-product-info { padding:2px 8px 0 0; }
+.detail-product-info .eyebrow { margin-bottom:8px; }
+.detail-product-info h2 { font-family:Georgia,serif; font-size:30px; margin:0 0 12px; }
+.detail-product-info .price { margin:12px 0; }
+.detail-product-info p { font-size:14px; line-height:1.7; color:#5d6b5f; }
+.detail-specs { list-style:none; padding:0!important; margin:18px 0 22px; }
+.detail-specs li { display:grid; grid-template-columns: minmax(120px,.8fr) 1fr; gap:12px; padding:9px 0; border-bottom:1px solid #edf0e9; font-size:13px; }
+.detail-specs li span:first-child { color:#657365; }
+.detail-actions { display:flex; flex-wrap:wrap; gap:10px; }
+.detail-actions .btn { min-width:150px; }
+.detail-extra { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:28px; padding:22px 24px; border-radius:12px; background:#f0f5e9; }
+.detail-extra h3 { font-size:15px; margin:0 0 10px; }
+.detail-extra p,.detail-extra li { font-size:13px; line-height:1.8; color:#536254; }
+.detail-extra ul { padding-left:18px; margin:0; }
+@media(max-width:700px) {
+ #detailOverlay.overlay { inset: 112px 0 0; }
+ #detailOverlay .modal-close { top:120px; right:12px; }
+ #detailContent { padding:18px 14px 30px; }
+ .detail-layout { grid-template-columns:1fr; gap:22px; }
+ .detail-gallery { grid-template-columns:58px minmax(0,1fr); gap:8px; }
+ .detail-thumb { width:58px; height:58px; }
+ .detail-main-image { height:300px; min-height:0; }
+ .detail-product-info h2 { font-size:25px; padding-right:34px; }
+ .detail-extra { grid-template-columns:1fr; gap:16px; padding:18px; }
+ .detail-specs li { grid-template-columns: minmax(110px,.8fr) 1fr; }
+}
+
+
+/* Perapian footer LittleSeed */
+.footer {
+  background:#f4f6ef;
+  margin-top:48px;
+  padding:38px 34px 20px;
+  border-top:1px solid #e5e9df;
+  color:var(--ink);
+}
+.footer-grid {
+  display:grid;
+  grid-template-columns:minmax(280px,1.6fr) repeat(2,minmax(130px,.8fr)) minmax(220px,1fr);
+  gap:clamp(24px,4vw,64px);
+  align-items:start;
+  max-width:1320px;
+  margin:0 auto;
+}
+.footer-grid > div { min-width:0; }
+.footer .brand {
+  display:inline-flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  width:auto;
+  min-width:0;
+  margin:0 0 16px;
+}
+.footer .brand-mark { display:inline-block; flex:0 0 auto; font-size:30px; line-height:1; }
+.footer .brand > span:last-child { display:flex; flex-direction:column; align-items:flex-start; }
+.footer .brand strong { font-size:23px; line-height:1.1; }
+.footer .brand small { text-align:left; margin-top:4px; }
+.footer p,.footer a { font-size:13px; line-height:1.8; }
+.footer-grid > div:first-child p { max-width:360px; margin:0; }
+.footer h4 { font-size:14px; margin:4px 0 14px; color:#26382b; }
+.footer a { width:fit-content; max-width:100%; }
+.footer #kontak p { overflow-wrap:anywhere; margin:0 0 14px; }
+.footer #kontak p:last-child { margin-top:16px; }
+.footer .copyright {
+  max-width:1320px;
+  margin:30px auto 0;
+  padding-top:16px;
+  font-size:12px;
+  line-height:1.6;
+}
+@media(max-width:900px) {
+  .footer { padding:30px 24px 18px; }
+  .footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 36px; }
+}
+@media(max-width:520px) {
+  .footer { padding:26px 18px 16px; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:24px 18px; }
+  .footer-grid > div:first-child { grid-column:1/-1; }
+  .footer-grid > div:first-child p { max-width:100%; }
+  .footer #kontak { grid-column:1/-1; }
+  .footer .copyright { margin-top:24px; }
+}
+
+</style>
+ </head>
+ <body>
+  <div class="wrap">
+   <header class="topbar">
+    <a class="brand" href="#beranda">
+     <span class="brand-mark">
+      ♧
+     </span>
+     <span>
+      <strong>
+       LittleSeed
+      </strong>
+      <small>
+       PLANTS
+      </small>
+     </span>
+    </a>
+    <label class="searchbox">
+     <span>
+      &telrec;
+     </span>
+     <input id="searchInput" placeholder='Cari tanaman, misalnya "Monstera"' type="search"/>
+    </label>
+    <div class="actions">
+     <button class="action" id="accountBtn">
+      <b>
+       ♙
+      </b>
+      Akun
+     </button>
+     <button class="action" id="wishlistBtn">
+      <b>
+       ♡
+      </b>
+      Wishlist
+      <span class="count" id="wishCount">
+       0
+      </span>
+     </button>
+     <button class="action" id="cartBtn">
+      <b>
+       🛒
+      </b>
+      Keranjang
+      <span class="count" id="cartCount">
+       0
+      </span>
+     </button>
+    </div>
+   </header>
+   <nav class="nav">
+    <a class="active" href="#beranda">
+     Beranda
+    </a>
+    <a href="#produk">
+     Tanaman
+    </a>
+    <a href="#kategori">
+     Pot &amp; Aksesori
+    </a>
+    <a href="#tips">
+     Tips &amp; Panduan
+    </a>
+    <a href="#tentang">
+     Tentang Kami
+    </a>
+    <a href="#kontak">
+     Kontak
+    </a>
+   </nav>
+   <main id="beranda">
+    <section class="hero">
+     <div class="hero-copy">
+      <div class="eyebrow">
+       Bawa alam lebih dekat
+      </div>
+      <h1>
+       Temukan tanaman terbaik untuk ruang hijaumu
+      </h1>
+      <p>
+       Beragam tanaman berkualitas untuk pecinta tanaman dan tukang kebun.
+      </p>
+      <div class="hero-buttons">
+       <button class="btn" onclick="document.querySelector('#produk').scrollIntoView()">
+        Belanja Sekarang
+       </button>
+       <button class="btn outline" onclick="document.querySelector('#kategori').scrollIntoView()">
+        Lihat Kategori
+       </button>
+      </div>
+     </div>
+    </section>
+    <section class="benefits">
+     <div class="benefit">
+      <span class="ico">
+       🚚
+      </span>
+      <div>
+       <strong>
+        Pengiriman Cepat &amp; Aman
+       </strong>
+       <small>
+        Tanaman dikemas dengan hati-hati
+       </small>
+      </div>
+     </div>
+     <div class="benefit">
+      <span class="ico">
+       ♧
+      </span>
+      <div>
+       <strong>
+        Tanaman Berkualitas
+       </strong>
+       <small>
+        Dipilih dengan teliti dan segar
+       </small>
+      </div>
+     </div>
+     <div class="benefit">
+      <span class="ico">
+       🌱
+      </span>
+      <div>
+       <strong>
+        Tips &amp; Komunitas
+       </strong>
+       <small>
+        Belajar bersama pecinta tanaman
+       </small>
+      </div>
+     </div>
+    </section>
+    <section id="kategori">
+     <div class="section-head">
+      <div>
+       <h2>
+        Kategori Populer
+       </h2>
+       <p>
+        Temukan tanaman sesuai gaya dan kebutuhanmu.
+       </p>
+      </div>
+      <a class="text-link" href="#produk">
+       Lihat semua &rarr;
+      </a>
+     </div>
+     <div class="categories" id="categoryGrid">
+      <button class="category" data-category="Tanaman Hias Daun">
+       <img alt="Tanaman hias daun" src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Tanaman Hias Daun
+       </span>
+      </button>
+      <button class="category" data-category="Tanaman Gantung">
+       <img alt="Tanaman gantung" src="https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Tanaman Gantung
+       </span>
+      </button>
+      <button class="category" data-category="Kaktus &amp; Sukulen">
+       <img alt="Kaktus" src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Kaktus &amp; Sukulen
+       </span>
+      </button>
+      <button class="category" data-category="Tanaman Indoor">
+       <img alt="Tanaman indoor" src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Tanaman Indoor
+       </span>
+      </button>
+      <button class="category" data-category="Tanaman Outdoor">
+       <img alt="Tanaman bunga" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Tanaman Outdoor
+       </span>
+      </button>
+      <button class="category" data-category="Pot &amp; Aksesori">
+       <img alt="Pot tanaman" src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+       <span>
+        Pot &amp; Aksesori
+       </span>
+      </button>
+     </div>
+    </section>
+    <section class="newsletter" id="tips">
+     <span class="leaf">
+      🌿
+     </span>
+     <div class="newsletter-copy">
+      <h3>
+       Tumbuh bersama LittleSeed
+      </h3>
+      <p>
+       Dapatkan tips berkebun, promo menarik, dan info terbaru.
+      </p>
+     </div>
+     <form id="newsletterForm">
+      <input id="newsletterEmail" placeholder="Masukkan email Anda" required="" type="email"/>
+      <button class="btn" type="submit">
+       Berlangganan
+      </button>
+     </form>
+    </section>
+    <section id="produk">
+     <div class="section-head">
+      <div>
+       <h2>
+        Tanaman Pilihan
+       </h2>
+       <p>
+        Tanaman favorit untuk membuat rumah terasa lebih hidup.
+       </p>
+      </div>
+      <a class="text-link" href="#produk" id="clearCategory">
+       Lihat semua &rarr;
+      </a>
+     </div>
+     <div class="shop-layout">
+      <aside class="filters">
+       <div class="filter-head">
+        <strong>
+         Filter
+        </strong>
+        <button class="reset" id="resetFilters">
+         Reset
+        </button>
+       </div>
+       <div class="filter-grid">
+        <div class="filter-group">
+         <h4>
+          Ukuran
+         </h4>
+         <label class="check">
+          <input name="size" type="checkbox" value="Kecil"/>
+          Kecil
+         </label>
+         <label class="check">
+          <input name="size" type="checkbox" value="Sedang"/>
+          Sedang
+         </label>
+         <label class="check">
+          <input name="size" type="checkbox" value="Besar"/>
+          Besar
+         </label>
+        </div>
+        <div class="filter-group">
+         <h4>
+          Harga Maksimal
+         </h4>
+         <input class="range" id="priceRange" max="400000" min="40000" step="10000" type="range" value="400000"/>
+         <div class="range-row">
+          <span>
+           Rp40.000
+          </span>
+          <strong id="priceLabel">
+           Rp400.000
+          </strong>
+         </div>
+        </div>
+        <div class="filter-group">
+         <h4>
+          Kebutuhan Cahaya
+         </h4>
+         <label class="check">
+          <input name="light" type="checkbox" value="Rendah"/>
+          Cahaya Rendah
+         </label>
+         <label class="check">
+          <input name="light" type="checkbox" value="Sedang"/>
+          Cahaya Sedang
+         </label>
+         <label class="check">
+          <input name="light" type="checkbox" value="Tinggi"/>
+          Cahaya Tinggi
+         </label>
+        </div>
+        <div class="filter-group">
+         <h4>
+          Perawatan
+         </h4>
+         <label class="check">
+          <input name="care" type="checkbox" value="Mudah"/>
+          Mudah
+         </label>
+         <label class="check">
+          <input name="care" type="checkbox" value="Sedang"/>
+          Sedang
+         </label>
+         <label class="check">
+          <input name="care" type="checkbox" value="Sulit"/>
+          Sulit
+         </label>
+        </div>
+        <div class="filter-group">
+         <h4>
+          Pet-friendly
+         </h4>
+         <label class="check">
+          <input name="pet" type="checkbox" value="Ya"/>
+          Ya
+         </label>
+         <label class="check">
+          <input name="pet" type="checkbox" value="Tidak"/>
+          Tidak
+         </label>
+        </div>
+       </div>
+      </aside>
+      <div>
+       <div class="products-top">
+        <div class="results" id="resultCount">
+         Menampilkan tanaman pilihan
+        </div>
+        <select aria-label="Urutkan produk" id="sortSelect">
+         <option value="featured">
+          Urutkan: Pilihan
+         </option>
+         <option value="newest">
+          Terbaru
+         </option>
+         <option value="low">
+          Harga Terendah
+         </option>
+         <option value="high">
+          Harga Tertinggi
+         </option>
+         <option value="rating">
+          Rating Tertinggi
+         </option>
+        </select>
+       </div>
+       <div class="product-grid" id="productGrid">
+       </div>
+       <div class="pagination" id="pagination">
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="footer" id="tentang">
+    <div class="footer-grid">
+     <div>
+      <a class="brand" href="#beranda">
+       <span class="brand-mark">
+        ♧
+       </span>
+       <span>
+        <strong>
+         LittleSeed
+        </strong>
+        <small>
+         PLANTS
+        </small>
+       </span>
+      </a>
+      <p>
+       Tempat terbaik untuk menemukan tanaman impianmu dan belajar berkebun bersama komunitas.
+      </p>
+     </div>
+     <div>
+      <h4>
+       Belanja
+      </h4>
+      <a href="#produk">
+       Semua Tanaman
+      </a>
+      <a href="#kategori">
+       Tanaman Indoor
+      </a>
+      <a href="#kategori">
+       Pot &amp; Aksesori
+      </a>
+      <a href="#produk">
+       Promo
+      </a>
+     </div>
+     <div>
+      <h4>
+       Bantuan
+      </h4>
+      <a href="#tips">
+       Cara Belanja
+      </a>
+      <a href="#kontak">
+       Pengiriman
+      </a>
+      <a href="#kontak">
+       Pembayaran
+      </a>
+      <a href="#kontak">
+       FAQ
+      </a>
+     </div>
+     <div id="kontak">
+      <h4>
+       Kontak Kami
+      </h4>
+      <p>
+       &phone; &nbsp;0812-3456-7890
+       <br/>
+       ✉ &nbsp;info@littleseedplants.com
+       <br/>
+       &target; &nbsp;Jakarta, Indonesia
+      </p>
+      <p>
+       Instagram &middot; Facebook &middot; TikTok
+      </p>
+     </div>
+    </div>
+    <div class="copyright">
+     &copy; 2026 LittleSeed Plants. Tumbuh dengan sepenuh hati.
+    </div>
+   </footer>
+  </div>
+  <div class="overlay" id="detailOverlay">
+   <div class="modal">
+    <button class="modal-close" id="closeDetail">
+     &times;
+    </button>
+    <div class="detail" id="detailContent">
+    </div>
+   </div>
+  </div>
+  <aside class="cart-panel" id="cartPanel">
+   <div class="cart-head">
+    <h2>
+     Keranjang Belanja
+    </h2>
+    <button id="closeCart">
+     &times;
+    </button>
+   </div>
+   <div class="cart-items" id="cartItems">
+   </div>
+   <div class="cart-total">
+    <div>
+     <span>
+      Total
+     </span>
+     <span id="cartTotal">
+      Rp0
+     </span>
+    </div>
+    <button class="btn" id="checkoutBtn">
+     Lanjutkan Checkout
+    </button>
+   </div>
+  </aside>
+  <div class="toast" id="toast">
+  </div>
+  <script>
+   const plants=[
+{id:1,name:'Monstera Deliciosa',price:145000,rating:4.8,reviews:120,size:'Besar',light:'Sedang',care:'Mudah',pet:'Tidak',category:'Tanaman Hias Daun',newest:12,img:'https://images.unsplash.com/photo-1746845165090-c0c3bca03304?auto=format&fit=crop&w=900&q=85',desc:'Tanaman berdaun lebar dengan lubang alami yang ikonik. Cocok untuk mempercantik sudut ruangan.'},
+{id:2,name:'Snake Plant',price:85000,rating:4.7,reviews:88,size:'Sedang',light:'Rendah',care:'Mudah',pet:'Tidak',category:'Tanaman Indoor',newest:11,img:'https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=900&q=85',desc:'Tanaman tangguh yang mudah dirawat dan cocok untuk pemula, termasuk di ruangan dengan cahaya terbatas.'},
+{id:3,name:'Peace Lily',price:65000,rating:4.6,reviews:76,size:'Sedang',light:'Rendah',care:'Sedang',pet:'Tidak',category:'Tanaman Indoor',newest:10,img:'https://images.unsplash.com/photo-1777813893080-80d3a0ef7c92?auto=format&fit=crop&w=900&q=85',desc:'Tanaman berdaun hijau dengan bunga putih yang elegan. Suka cahaya tidak langsung dan media yang lembap.'},
+{id:4,name:'Fiddle Leaf Fig',price:285000,rating:4.9,reviews:58,size:'Besar',light:'Tinggi',care:'Sulit',pet:'Tidak',category:'Tanaman Hias Daun',newest:9,img:'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=85',desc:'Tanaman dekoratif dengan daun besar yang membuat ruangan terasa lebih segar dan modern.'},
+{id:5,name:'Philodendron Brasil',price:75000,rating:4.6,reviews:64,size:'Sedang',light:'Sedang',care:'Mudah',pet:'Tidak',category:'Tanaman Gantung',newest:8,img:'https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=900&q=85',desc:'Philodendron dengan corak hijau cerah yang cantik, cocok diletakkan di rak atau pot gantung.'},
+{id:6,name:'Pothos Marble Queen',price:65000,rating:4.5,reviews:53,size:'Kecil',light:'Rendah',care:'Mudah',pet:'Tidak',category:'Tanaman Gantung',newest:7,img:'https://images.unsplash.com/photo-1596724878582-76f1a8fdc24f?auto=format&fit=crop&w=900&q=85',desc:'Tanaman merambat dengan perpaduan warna hijau dan krem yang menawan. Perawatannya praktis.'},
+{id:7,name:'Aglaonema Red',price:85000,rating:4.7,reviews:41,size:'Sedang',light:'Sedang',care:'Sedang',pet:'Tidak',category:'Tanaman Hias Daun',newest:6,img:'https://images.unsplash.com/photo-1751445384288-232ff85ef5ff?auto=format&fit=crop&w=900&q=85',desc:'Aglaonema dengan warna daun merah yang menjadi aksen menarik di dalam rumah.'},
+{id:8,name:'Kaktus Mini',price:40000,rating:4.6,reviews:68,size:'Kecil',light:'Tinggi',care:'Mudah',pet:'Ya',category:'Kaktus & Sukulen',newest:5,img:'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=900&q=85',desc:'Kaktus mungil yang pas untuk meja kerja dan koleksi tanaman pertama. Tidak membutuhkan banyak air.'},
+{id:9,name:'Calathea Orbifolia',price:175000,rating:4.8,reviews:37,size:'Sedang',light:'Rendah',care:'Sedang',pet:'Ya',category:'Tanaman Hias Daun',newest:4,img:'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=85',desc:'Daun lebar dengan pola garis yang lembut, pilihan menarik untuk koleksi tanaman indoor.'},
+{id:10,name:'Monstera Adansonii',price:110000,rating:4.7,reviews:92,size:'Sedang',light:'Sedang',care:'Mudah',pet:'Tidak',category:'Tanaman Gantung',newest:3,img:'https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=900&q=85',desc:'Monstera dengan daun berlubang unik yang bisa tumbuh merambat atau menjuntai.'},
+{id:11,name:'Aloe Vera',price:55000,rating:4.5,reviews:49,size:'Kecil',light:'Tinggi',care:'Mudah',pet:'Tidak',category:'Kaktus & Sukulen',newest:2,img:'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=900&q=85',desc:'Sukulen dengan daun tebal yang menyimpan air dan mudah dirawat di tempat terang.'},
+{id:12,name:'Peperomia Green',price:95000,rating:4.6,reviews:31,size:'Kecil',light:'Sedang',care:'Mudah',pet:'Ya',category:'Tanaman Indoor',newest:1,img:'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=85',desc:'Tanaman kompak dengan daun mengilap, cocok untuk meja, rak, atau sudut kecil.'},
+{id:13,name:'Bougenville Outdoor',price:120000,rating:4.7,reviews:28,size:'Sedang',light:'Tinggi',care:'Mudah',pet:'Ya',category:'Tanaman Outdoor',newest:13,img:'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85',desc:'Tanaman berbunga warna-warni yang cocok untuk teras atau halaman dengan sinar matahari cukup.'},
+{id:14,name:'Palem Kuning',price:185000,rating:4.6,reviews:34,size:'Besar',light:'Tinggi',care:'Sedang',pet:'Ya',category:'Tanaman Outdoor',newest:14,img:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=85',desc:'Tanaman berdaun rimbun untuk memberi nuansa tropis di halaman atau teras.'},
+{id:15,name:'Pot Keramik Minimalis',price:55000,rating:4.8,reviews:45,size:'Kecil',light:'Sedang',care:'Mudah',pet:'Ya',category:'Pot & Aksesori',newest:15,img:'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=85',desc:'Pot dekoratif bergaya minimalis yang cocok untuk berbagai tanaman indoor maupun outdoor.'},
+{id:16,name:'Set Pot Dekoratif',price:95000,rating:4.7,reviews:22,size:'Sedang',light:'Sedang',care:'Mudah',pet:'Ya',category:'Pot & Aksesori',newest:16,img:'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=85',desc:'Set pot bermotif untuk menata tanaman agar sudut ruangan terlihat lebih menarik.'}
+];
+
+const rupiah=n=>'Rp'+n.toLocaleString('id-ID');
+
+let wishlist=new Set(),cart={},page=1,perPage=8,categoryFilter='',showWishlist=false;
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+function selected(name){return $$(`input[name="${name}"]:checked`).map(x=>x.value)}
+
+function filteredPlants(){
+ let q=$('#searchInput').value.trim().toLowerCase(),max=+$(' #priceRange'.trim()).value;
+ let arr=plants.filter(p=>(!q||p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q))&&p.price<=max&&(!categoryFilter||p.category===categoryFilter)&&(!selected('size').length||selected('size').includes(p.size))&&(!selected('light').length||selected('light').includes(p.light))&&(!selected('care').length||selected('care').includes(p.care))&&(!selected('pet').length||selected('pet').includes(p.pet))&&(!showWishlist||wishlist.has(p.id)));
+ let sort=$('#sortSelect').value;
+ if(sort==='low')arr.sort((a,b)=>a.price-b.price);
+ if(sort==='high')arr.sort((a,b)=>b.price-a.price);
+ if(sort==='rating')arr.sort((a,b)=>b.rating-a.rating);
+ if(sort==='newest')arr.sort((a,b)=>b.newest-a.newest);
+ return arr;
+}
+
+function render(){
+ const all=filteredPlants(),pages=Math.max(1,Math.ceil(all.length/perPage));
+ if(page>pages)page=pages;
+ $('#resultCount').innerHTML=`Menampilkan <strong>${all.length?((page-1)*perPage+1):0}–${Math.min(page*perPage,all.length)} dari ${all.length} tanaman</strong>`;
+ const visible=all.slice((page-1)*perPage,page*perPage);
+ $('#productGrid').innerHTML=visible.length?visible.map(p=>`<article class="product-card">
+ <div class="product-image" data-detail="${p.id}"><img src="${p.img}" alt="${p.name}" loading="lazy"><button class="heart ${wishlist.has(p.id)?'liked':''}" data-wish="${p.id}" aria-label="Tambahkan ke wishlist">${wishlist.has(p.id)?'♥':'♡'}</button></div>
+ <div class="product-info"><button class="product-name" data-detail="${p.id}">${p.name}</button><div class="product-price">${rupiah(p.price)}</div><div class="rating">★ <b>${p.rating.toFixed(1)}</b><span>(${p.reviews})</span></div><div class="product-meta"><span class="tag">${p.size}</span><span class="tag">Rawat ${p.care.toLowerCase()}</span></div><div class="card-bottom"><button class="btn" data-add="${p.id}">+ Keranjang</button><button class="btn outline" data-detail="${p.id}">Detail</button></div></div></article>`).join(''):`<div class="empty"><strong>Tanaman tidak ditemukan 🌱</strong>Coba ubah kata pencarian atau filter yang dipilih.</div>`;
+ $('#pagination').innerHTML=all.length>perPage?Array.from({length:pages},(_,i)=>`<button class="page ${page===i+1?'active':''}" data-page="${i+1}">${i+1}</button>`).join(''):'';
+ $('#wishCount').textContent=wishlist.size;$$('.category').forEach(c=>c.classList.toggle('selected',c.dataset.category===categoryFilter));
+}
+
+function toast(msg){let t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2300)}
+
+function addCart(id){cart[id]=(cart[id]||0)+1;renderCart();toast('Tanaman berhasil ditambahkan ke keranjang!')}
+
+function toggleWish(id){if(wishlist.has(id)){wishlist.delete(id);toast('Dihapus dari wishlist')}else{wishlist.add(id);toast('Ditambahkan ke wishlist')}render()}
+
+function renderCart(){
+ let entries=Object.entries(cart).filter(([id,n])=>n>0),count=entries.reduce((s,[id,n])=>s+n,0),total=entries.reduce((s,[id,n])=>s+plants.find(p=>p.id==id).price*n,0);
+ $('#cartCount').textContent=count;$('#cartTotal').textContent=rupiah(total);
+ $('#cartItems').innerHTML=entries.length?entries.map(([id,n])=>{let p=plants.find(p=>p.id==id);return `<div class="cart-item"><img src="${p.img}" alt="${p.name}"><div><strong>${p.name}</strong><small>${rupiah(p.price)}</small><div class="qty"><button data-qty="${id}" data-delta="-1">−</button><span>${n}</span><button data-qty="${id}" data-delta="1">+</button></div></div><button class="remove" data-remove="${id}">Hapus</button></div>`}).join(''):'<div class="empty" style="margin-top:25px"><strong>Keranjang masih kosong</strong>Yuk, temukan tanaman favoritmu.</div>';
+}
+
+function openDetail(id){
+ let p=plants.find(x=>x.id===+id);
+ if(!p)return;
+ const careText=p.care==='Mudah'?'Siram saat media tanam mulai mengering.':p.care==='Sedang'?'Periksa kelembapan tanah sebelum menyiram.':'Perhatikan kelembapan dan kebutuhan cahaya secara rutin.';
+ const lightText=p.light||'Cahaya tidak langsung';
+ $('#detailContent').innerHTML=`
+  <div class="detail-crumb"><a href="#beranda" style="color:inherit;text-decoration:none">Beranda</a> &nbsp;›&nbsp; <a href="#produk" style="color:inherit;text-decoration:none">Tanaman</a> &nbsp;›&nbsp; ${p.name}</div>
+  <div class="detail-layout">
+   <div class="detail-gallery">
+    <div class="detail-thumbs">
+     <button class="detail-thumb active" data-gallery="${p.img}" aria-label="Lihat foto utama"><img src="${p.img}" alt="${p.name}"></button>
+     <button class="detail-thumb" data-gallery="${p.img}" aria-label="Lihat foto tanaman"><img src="${p.img}" alt="${p.name}"></button>
+     <button class="detail-thumb" data-gallery="${p.img}" aria-label="Lihat detail tanaman"><img src="${p.img}" alt="Detail ${p.name}"></button>
+     <button class="detail-thumb" data-gallery="${p.img}" aria-label="Lihat foto lainnya"><img src="${p.img}" alt="${p.name}"></button>
+    </div>
+    <img class="detail-main-image" id="detailMainImage" src="${p.img}" alt="${p.name}">
+   </div>
+   <div class="detail-product-info">
+    <div class="eyebrow">${p.category}</div>
+    <h2>${p.name}</h2>
+    <div class="price">${rupiah(p.price)}</div>
+    <div class="rating">★ <b>${p.rating.toFixed(1)}</b><span> (${p.reviews} ulasan)</span></div>
+    <p>${p.desc}</p>
+    <ul class="detail-specs">
+     <li><span>♧ &nbsp;Ukuran</span><span>${p.size}</span></li>
+     <li><span>☼ &nbsp;Kebutuhan Cahaya</span><span>${lightText}</span></li>
+     <li><span>❋ &nbsp;Perawatan</span><span>${p.care}</span></li>
+     <li><span>♧ &nbsp;Pet-friendly</span><span>${p.pet==='Ya'?'Ya':'Tidak disarankan'}</span></li>
+    </ul>
+    <div class="detail-actions"><button class="btn" data-add="${p.id}">+ Tambahkan ke Keranjang</button><button class="btn outline" data-wish="${p.id}">${wishlist.has(p.id)?'♥ Tersimpan':'♡ Wishlist'}</button></div>
+   </div>
+  </div>
+  <div class="detail-extra">
+   <section><h3>Deskripsi</h3><p>${p.name} cocok untuk melengkapi koleksi tanaman di rumah. ${p.desc}</p></section>
+   <section><h3>Panduan Perawatan</h3><ul><li>${careText}</li><li>Letakkan di area dengan kebutuhan cahaya yang sesuai.</li><li>Bersihkan daun secara berkala.</li></ul></section>
+  </div>`;
+ $('#detailOverlay').classList.add('show');
+ document.body.style.overflow='hidden';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function reset(){ $$('input[type="checkbox"]').forEach(x=>x.checked=false);$('#priceRange').value=400000;$('#priceLabel').textContent=rupiah(400000);$('#searchInput').value='';$('#sortSelect').value='featured';categoryFilter='';showWishlist=false;page=1;render()}
+$('#searchInput').addEventListener('input',()=>{page=1;render()});$('#sortSelect').addEventListener('change',()=>{page=1;render()});
+$$('input[type="checkbox"]').forEach(x=>x.addEventListener('change',()=>{page=1;render()}));
+$('#priceRange').addEventListener('input',e=>{$('#priceLabel').textContent=rupiah(+e.target.value);page=1;render()});
+$('#resetFilters').addEventListener('click',reset);$('#clearCategory').addEventListener('click',()=>{categoryFilter='';showWishlist=false;page=1;render()});
+$('#categoryGrid').addEventListener('click',e=>{let c=e.target.closest('[data-category]');
+ if(!c)return;categoryFilter=categoryFilter===c.dataset.category?'':c.dataset.category;showWishlist=false;page=1;render();$('#produk').scrollIntoView({behavior:'smooth'})});
+document.body.addEventListener('click',e=>{
+ let add=e.target.closest('[data-add]'),wish=e.target.closest('[data-wish]'),detail=e.target.closest('[data-detail]'),pg=e.target.closest('[data-page]'),qty=e.target.closest('[data-qty]'),remove=e.target.closest('[data-remove]');
+ if(add){addCart(+add.dataset.add);
+ if($('#detailOverlay').classList.contains('show')){ $('#detailOverlay').classList.remove('show'); document.body.style.overflow=''; }}
+ if(wish){e.preventDefault();e.stopPropagation();toggleWish(+wish.dataset.wish);
+ if($('#detailOverlay').classList.contains('show'))openDetail(+wish.dataset.wish)}
+ if(detail)openDetail(+detail.dataset.detail);
+ if(pg){page=+pg.dataset.page;render();$('#produk').scrollIntoView({behavior:'smooth'})}
+ if(qty){let id=qty.dataset.qty;cart[id]=(cart[id]||0)+(+qty.dataset.delta);
+ if(cart[id]<=0)delete cart[id];renderCart()}
+ if(remove){delete cart[remove.dataset.remove];renderCart()}
+});
+$('#wishlistBtn').addEventListener('click',()=>{showWishlist=!showWishlist;categoryFilter='';page=1;render();$('#produk').scrollIntoView({behavior:'smooth'});toast(showWishlist?'Menampilkan wishlist':'Menampilkan semua tanaman')});
+$('#cartBtn').addEventListener('click',()=>$('#cartPanel').classList.add('open'));$('#closeCart').addEventListener('click',()=>$('#cartPanel').classList.remove('open'));function closeDetail(){$('#detailOverlay').classList.remove('show');document.body.style.overflow=''}$('#closeDetail').addEventListener('click',closeDetail);$('#detailOverlay').addEventListener('click',e=>{if(e.target.id==='detailOverlay')closeDetail();const thumb=e.target.closest('[data-gallery]');if(thumb){$('#detailMainImage').src=thumb.dataset.gallery;$$('.detail-thumb').forEach(x=>x.classList.toggle('active',x===thumb))}});
+$('#accountBtn').addEventListener('click',()=>toast('Fitur akun akan segera hadir.'));
+$('#checkoutBtn').addEventListener('click',()=>{if(!Object.keys(cart).length){toast('Keranjang masih kosong.');return}toast('Checkout demo berhasil dibuka!');});
+$('#newsletterForm').addEventListener('submit',e=>{e.preventDefault();toast('Terima kasih sudah berlangganan!');e.target.reset()});
+// Gambar menggunakan URL khusus sesuai tanaman atau aksesori.
+
+document.addEventListener('error', function(event) {
+  const img = event.target;
+  if (img.tagName !== 'IMG' || img.dataset.fallbackTried) return;
+  img.dataset.fallbackTried = 'true';
+  img.alt = (img.alt || 'Gambar') + ' (gambar tidak tersedia)';
+  img.style.objectFit = 'contain';
+  img.style.background = '#edf3e9';
+  img.removeAttribute('src');
+}, true);
+
+render();
+renderCart();
+  </script>
+ </body>
+</html>
+
